@@ -20,6 +20,15 @@
   <body>
     <script src= "js/three.js"> </script>
     <script src= "js/OrbitControls.js"> </script>
+    <video id='video' 
+    controls 
+    width='0'
+    loop=true 
+    muted=true
+    autoplay>
+      <source src='img/video0-5.mov' type='video/mp4'>
+      <source src='img/video0-5.mov' type='video/mov'>
+    </video>
 
     <script>
       var scene = new THREE.Scene( );
@@ -40,21 +49,31 @@
 
       controls = new THREE.OrbitControls(camera,renderer.domElement);
 
+    scene.fog = new THREE.Fog( 0xFF0000, 1, 9 );
+    
+    const light1 = new THREE.PointLight( 0xffffff );
+    light1.position.set( 0, 70, 0 );
+    scene.add( light1 );
 
-	  scene = new THREE.Scene();
-	  scene.fog = new THREE.Fog( 0xFFFFFF, 1, 4 );
+    const light2 = new THREE.PointLight( 0xffffff );
+    light2.position.set( 50, 0, 0 );
+    scene.add( light2 );
+
+    const light3 = new THREE.PointLight( 0xff0000 );
+    light3.position.set( -50, 0, 0 );
+    scene.add( light3 );
+
+    const ambientLight = new THREE.AmbientLight( 0x202020 ); // soft white light
+    scene.add( ambientLight );
 
       //create shape
-      var geometry = new THREE.BoxGeometry( 1, 1, 1);
-      var cubeMaterials =
-      [
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/1.png'), side: THREE.Doubleside }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/1.png'), side: THREE.Doubleside }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/1.png'), side: THREE.Doubleside }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/1.png'), side: THREE.Doubleside }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/1.png'), side: THREE.Doubleside }),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/1.png'), side: THREE.Doubleside })
-      ];
+      var geometry = new THREE.BoxGeometry( 2, 1, 1);
+      const video = document.getElementById( 'video' );
+      const texture = new THREE.VideoTexture( video );
+      var cubeMaterials = []
+      for (let i = 0; i < 6; i++){
+        cubeMaterials.push(new THREE.MeshPhongMaterial({ map: texture, side: THREE.Doubleside }));
+      }
 
       //create material
       var material = new THREE.MeshFaceMaterial(cubeMaterials);
