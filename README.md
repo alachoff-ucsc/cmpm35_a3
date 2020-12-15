@@ -1,7 +1,10 @@
 # cmpm35_a3
 Group: Dexter Huang, Claudia McMillin, Asher Lachoff
+
 assignment 3 for cmpm35
+
 FLASHING LIGHTS WARNING. We had to speed the video up to get it past the 25MB limit. It is very fast. 
+
 To view, open the Pantus_Maximus folder via localhost. The other test folder is a deceiver. 
 
 Both SpongebobRectangularPrismPants and SpongeBuddhaNoPants have click and drag camera controls with the scroll wheel mapped to zoom. If you move the camera around on SpongeBuddhaNoPants you'll scare it and it'll freeze the video (zooming is ok). 
